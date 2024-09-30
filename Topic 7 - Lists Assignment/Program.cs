@@ -1,4 +1,6 @@
-﻿namespace Topic_7___Lists_Assignment
+﻿using System;
+
+namespace Topic_7___Lists_Assignment
 {
     internal class Program
     {
@@ -8,8 +10,8 @@
 
             Random generator = new Random();
 
-            string userChoice, removeAmountChoice;
-            int numRemoveChoice;
+            string userChoice;
+            int numRemoveChoice, numAddChoice;
             bool done = false;
 
             Console.WriteLine("Generating a list of numbers...");
@@ -108,23 +110,58 @@
 
                     Console.WriteLine();
 
-                    Console.WriteLine("Do you want to remove ALL occurrences of that number or just one occurrence of that number?");
-                    removeAmountChoice = Console.ReadLine();
-
-                    if (removeAmountChoice.ToLower() == "all" || removeAmountChoice.ToLower() == "remove all")
+                    if (numList.Remove(numRemoveChoice))
                     {
-                        Console.WriteLine("Got it! Removing all occurrences of " + numRemoveChoice + " from the list...");
-                        while (!numList.Remove(numRemoveChoice))
+                        Console.WriteLine("Removing all occurrences of the number " + numRemoveChoice + " from the list");
+                        while (numList.Remove(numRemoveChoice))
                         {
                             numList.Remove(numRemoveChoice);
                         }
                     }
-                    else if (numList.Remove(numRemoveChoice))
-                        Console.WriteLine("Got it! Removing one occurrence of " + numRemoveChoice + " from the list...");
-                    else
-                        Console.WriteLine("Failed top remove number as " + numRemoveChoice + " does not exist anywhere in the list.");
+                    else if (!numList.Remove(numRemoveChoice))
+                        Console.WriteLine("Failed to remove number as " + numRemoveChoice + " does not exist anywhere in the list.");
 
                     Console.WriteLine();
+
+                    Console.WriteLine("Printing the list...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        Console.Write(numList[i] + ", ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+
+                    Console.Clear();
+                }
+                else if(userChoice == "5" || userChoice.ToLower() == "add number")
+                {
+                    Console.WriteLine("Pick a number do you want to add to the list: ");
+                    while (!Int32.TryParse(Console.ReadLine(), out numAddChoice))
+                        Console.WriteLine("That's not a valid integer, please try again...");
+
+                    Console.WriteLine();
+
+                    numList.Add(numAddChoice);
+
+                    Console.WriteLine("Printing the list...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                            Console.Write(numList[i] + ", ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+
+                    Console.Clear();
+                }
+                else if (userChoice == "6" || userChoice.ToLower() == "count occurrences ")
+                {
+
 
                     Console.WriteLine("Printing the list...");
                     for (int i = 0; i <= numList.Count() - 1; i++)
