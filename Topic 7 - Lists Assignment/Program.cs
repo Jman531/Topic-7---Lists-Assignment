@@ -11,7 +11,7 @@ namespace Topic_7___Lists_Assignment
             Random generator = new Random();
 
             string userChoice;
-            int numRemoveChoice, numAddChoice;
+            int numRemoveChoice, numAddChoice, numOccurrenceChoice, numOccurrenceCount, numMode, numMaxCount, numCurrentCount;
             bool done = false;
 
             Console.WriteLine("Generating a list of numbers...");
@@ -37,10 +37,10 @@ namespace Topic_7___Lists_Assignment
                 Console.WriteLine("4. Remove number");
                 Console.WriteLine("5. Add a number to the list");
                 Console.WriteLine("6. Count the number of occurrrnces of a specified number");
-                Console.WriteLine("7. Print the largest number");
-                Console.WriteLine("8. Print the smallest number");
-                Console.WriteLine("9. Print the sum of all the numbers");
-                Console.WriteLine("10. Print the average of all the numbers");
+                Console.WriteLine("7. Print largest number");
+                Console.WriteLine("8. Print smallest number");
+                Console.WriteLine("9. Print the sum of the numbers");
+                Console.WriteLine("10. Print the average of the numbers");
                 Console.WriteLine("11. Determine the most frequently occurring value");
                 Console.WriteLine("12. Quit");
                 userChoice = Console.ReadLine();
@@ -159,9 +159,147 @@ namespace Topic_7___Lists_Assignment
 
                     Console.Clear();
                 }
-                else if (userChoice == "6" || userChoice.ToLower() == "count occurrences ")
+                else if (userChoice == "6" || userChoice.ToLower() == "count occurrences")
                 {
+                    numOccurrenceCount = 0;
 
+                    Console.WriteLine("Pick a number to count how many times it shows up in the list: ");
+                    while (!Int32.TryParse(Console.ReadLine(), out numOccurrenceChoice))
+                        Console.WriteLine("Invalid input, please try again...");
+
+                    Console.WriteLine();
+
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        if (numList[i] == numOccurrenceChoice)
+                        {
+                            numOccurrenceCount++;
+                        }
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("The number " + numOccurrenceChoice + " shows up in the list " + numOccurrenceCount + " times!");
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Printing the list...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        Console.Write(numList[i] + ", ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+
+                    Console.Clear();
+                }
+                else if (userChoice == "7" || userChoice.ToLower() == "print largest number")
+                {
+                    numList.Sort();
+
+                    Console.WriteLine("The largest number in the list is " + numList[numList.Count() - 1] + "!");
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Printing the list...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        Console.Write(numList[i] + ", ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+
+                    Console.Clear();
+                }
+                else if (userChoice == "8" || userChoice.ToLower() == "print smallest number")
+                {
+                    numList.Sort();
+
+                    Console.WriteLine("The smallest number in the list is " + numList[0] + "!");
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Printing the list...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        Console.Write(numList[i] + ", ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+
+                    Console.Clear();
+                }
+                else if (userChoice == "9" || userChoice.ToLower() == "sum of numbers")
+                {
+                    Console.WriteLine("The sum is " + numList.Sum() + "!");
+
+                    Console.WriteLine("Printing the list...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        Console.Write(numList[i] + ", ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+
+                    Console.Clear();
+                }
+                else if (userChoice == "10" || userChoice.ToLower() == "average of numbers")
+                {
+                    Console.WriteLine("The average is " + numList.Average() + "!");
+
+                    Console.WriteLine("Printing the list...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        Console.Write(numList[i] + ", ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("Press ENTER to continue");
+                    Console.ReadLine();
+
+                    Console.Clear();
+                }
+                else if (userChoice == "11" || userChoice.ToLower() == "most frequent value")
+                {
+                    numList.Sort();
+                    numMode = 0;
+                    numMaxCount = 0;
+                    numCurrentCount = 0;
+
+                    Console.WriteLine("Finding the most frequent value...");
+                    for (int i = 0; i <= numList.Count() - 1; i++)
+                    {
+                        if (numList[i] == numList[i - 1])
+                        {
+                            numCurrentCount++;
+                        }
+                        else
+                        {
+                            if (numCurrentCount > numMaxCount)
+                            {
+                                numMaxCount = numCurrentCount;
+                                numMode = numList[i - 1];
+                            }
+                            numCurrentCount = 0;
+                        }
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("The mode is " + numMode + "!");
 
                     Console.WriteLine("Printing the list...");
                     for (int i = 0; i <= numList.Count() - 1; i++)
